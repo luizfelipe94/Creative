@@ -1,3 +1,3 @@
-# Jogo de Memória
+# Ad com formulário
 
-Projeto criado no curso React Profissional
+Uma página para exibição de anúncios com formulário de perguntas e respostas.
