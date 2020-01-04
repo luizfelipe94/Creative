@@ -1,11 +1,6 @@
-import { NEXT_QUESTION, FINISH } from "./actionTypes";
+import { ADD_QUESTION } from "./actionTypes";
 
-export const nextQuestion = value => ({
-    type: NEXT_QUESTION,
-    newValue: value
-});
-
-export const finish = value => ({
-    type: FINISH,
-    newValue: value
+export const addQuestion = question => ({
+    type: ADD_QUESTION,
+    payload: question
 });

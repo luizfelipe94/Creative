@@ -1,19 +1,33 @@
 import React from "react";
-import Grid from '@material-ui/core/Grid';
+import Checkbox from "./Checkbox";
+
 
 const QuestionTitle = ({ title }) => (
     <h3>{title}</h3>
 )
 
 const QuestionOption = ({ type, option }) => (
-    <li><input type={type} value="cheese" /><label>{option.description}</label></li>
+    // <li><input type={type} value="cheese" /><label>{option.description}</label></li>
+    <form>
+
+    </form>
 )
 
 
 class Question extends React.Component {
 
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
+    // }
+
+    createCheckbox(label) {
+        return (
+            <Checkbox
+                label={label}
+                handleCheckboxChange={this.toggleCheckbox}
+                key={label}
+            />
+        )
     }
 
     renderOption(option) {

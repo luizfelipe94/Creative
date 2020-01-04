@@ -1,19 +1,14 @@
+import { ADD_QUESTION } from "../actions/actionTypes";
+
 const initialState = {
-    answredQty: 0,
+    questions: []
 };
 
 export const QuestionsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'next':
-            return {
-                ...state,
-                newValue: action.newValue
-            };
-        case 'finish':
-            return {
-                ...state,
-                newValue: action.newValue
-            }
+        case ADD_QUESTION:
+            state.questions.push(action.payload);
+            return state;
         default:
             return state;
     }

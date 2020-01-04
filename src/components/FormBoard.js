@@ -7,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import Question from "./Question";
+import { connect } from 'react-redux';
+import CheckboxQuestion from "./CheckboxQuestion";
 
 const questions = [
     {
@@ -15,10 +16,10 @@ const questions = [
         type: 'checkbox',
         options: [
             {
-                description: '1',
+                description: '1 - 1',
             },
             {
-                description: '2',
+                description: '1 - 2',
             }
         ]
     },
@@ -27,10 +28,10 @@ const questions = [
         type: 'radio',
         options: [
             {
-                description: '1',
+                description: '2 - 1',
             },
             {
-                description: '2',
+                description: '2 - 2',
             }
         ]
     },
@@ -58,7 +59,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const FormBoard = () => {
+const FormBoard = (props) => {
 
     const classes = useStyles();
     const theme = useTheme();
@@ -78,7 +79,7 @@ const FormBoard = () => {
             <Paper square elevation={0} className={classes.header}>
                 <Typography>{questions[activeStep].label}</Typography>
             </Paper>
-            <Question question={questions[activeStep]} />
+            <CheckboxQuestion question={questions[activeStep]} />
             <MobileStepper
                 steps={maxSteps}
                 position="static"
@@ -101,4 +102,4 @@ const FormBoard = () => {
     );
 }
 
-export default FormBoard;
+export default connect()(FormBoard);

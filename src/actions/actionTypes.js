@@ -1,2 +1,1 @@
-export const NEXT_QUESTION = 'NEXT_QUESTION';
-export const FINISH = 'FINISH';
+export const ADD_QUESTION = 'ADD_QUESTION';
