@@ -10,33 +10,6 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { connect } from 'react-redux';
 import CheckboxQuestion from "./CheckboxQuestion";
 
-const questions = [
-    {
-        title: 'Pergunta 1 de 2',
-        type: 'checkbox',
-        options: [
-            {
-                description: '1 - 1',
-            },
-            {
-                description: '1 - 2',
-            }
-        ]
-    },
-    {
-        title: 'Pergunta 2 de 2',
-        type: 'radio',
-        options: [
-            {
-                description: '2 - 1',
-            },
-            {
-                description: '2 - 2',
-            }
-        ]
-    },
-];
-
 const useStyles = makeStyles(theme => ({
     root: {
         maxWidth: 400,
@@ -58,21 +31,32 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
 const FormBoard = (props) => {
 
+    const questions = props.questions;
     const classes = useStyles();
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = questions.length;
 
     const handleNext = () => {
+        props.dispatch({ type: 'ADD_QUESTION', payload: questions[activeStep] });
         setActiveStep(prevActiveStep => prevActiveStep + 1);
+        if(canSubmit()){
+            submitForm();
+        }
     };
 
     const handleBack = () => {
+        props.dispatch({ type: 'REMOVE_QUESTION', payload: questions[activeStep] });
         setActiveStep(prevActiveStep => prevActiveStep - 1);
     };
+
+    const submitForm = () => {
+        window.location.href = "/success";
+    }
+
+    const canSubmit = () => activeStep === maxSteps - 1;
 
     return (
         <Container className={classes.root}>
@@ -86,8 +70,8 @@ const FormBoard = (props) => {
                 variant="text"
                 activeStep={activeStep}
                 nextButton={
-                    <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-                        Next
+                    <Button size="small" onClick={handleNext}>
+                        {activeStep === maxSteps - 1 ? 'Finalizar' : 'próximo'}
                         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                     </Button>
                 }
@@ -102,4 +86,4 @@ const FormBoard = (props) => {
     );
 }
 
-export default connect()(FormBoard); 
+export default connect()(FormBoard);

@@ -5,7 +5,11 @@ class CheckboxQuestion extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: "" };
+        this.state = { 
+            questionId: "",
+            questionOptions: "",
+            selectedOptions: []
+        };
     }
 
     onClick(event) {
@@ -16,12 +20,22 @@ class CheckboxQuestion extends Component {
         this.selectedCheckboxes = new Set();
     }
 
+    getQuestion(){
+        return {
+            questionId: this.props.question.id,
+            questionOptions: this.props.question.options
+        }
+    }
+
     toggleCheckbox = label => {
         if (this.selectedCheckboxes.has(label)) {
             this.selectedCheckboxes.delete(label);
+            this.setState({ selectedOptions: this.selectedCheckboxes, ...this.getQuestion() });
         } else {
             this.selectedCheckboxes.add(label);
+            this.setState({ selectedOptions: this.selectedCheckboxes, ...this.getQuestion() });
         }
+        console.log(this.state);
     }
 
     createCheckbox = label => (
@@ -39,7 +53,7 @@ class CheckboxQuestion extends Component {
     render() {
         return (
             <div className="container">
-                <label type="text" value={!this.state.value} onClick={this.onClick}>{this.props.question.title}</label>
+                <label type="text" value={!this.state.value} >{this.props.question.title}</label>
                 {this.createCheckboxes()}
             </div>
         );

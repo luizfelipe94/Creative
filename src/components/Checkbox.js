@@ -31,7 +31,6 @@ class Checkbox extends Component {
             checked={isChecked}
             onChange={this.toggleCheckboxChange}
           />
-
           {label}
         </label>
       </div>
