@@ -102,4 +102,4 @@ const FormBoard = (props) => {
     );
 }
 
-export default connect()(FormBoard);
+export default connect()(FormBoard); 
